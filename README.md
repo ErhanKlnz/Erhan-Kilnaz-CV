@@ -2,6 +2,7 @@
 
 This project creates a personal portfolio webpage using Streamlit to showcase projects, skills, and contact information. The page is interactive, lightweight, and can be easily deployed.
 
+Link: https://erhan-kilnaz-cv.streamlit.app/
 ## Features
 
 - **Responsive Layout**: Uses Streamlit's container and column layout for a clean and responsive design.
