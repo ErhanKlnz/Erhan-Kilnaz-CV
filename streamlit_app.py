@@ -83,7 +83,7 @@ with st.container():
             to building secure file management platforms, thermostat simulation systems, and machine learning 
             classification models. 
 
-            - **Programming Languages**: C++, C#, Python, SQL
+            - **Programming Languages**: C, C++, C#, Python, SQL, Html, Css
             - **Tools & Technologies**: Arduino IDE, MSSQL, PostgreSQL, Machine Learning
             - **Key Projects**: Cloud site development, Dormitory automation system, Thermostat simulation platform
             """
