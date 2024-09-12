@@ -34,7 +34,7 @@ img_sql_yrt = Image.open("images/yt_sql_yrt.png")
 # ---- HEADER SECTION ----
 with st.container():
     st.subheader("Hi, I am Erhan :wave:")
-    st.title("A Computer Engineer From Turkey")
+    st.title("A Computer Engineer From Turkey  ")
     st.write(
         "Hello, I am Erhan Zeki KILNAZ, a graduate of Computer Engineering from Düzce University. During my internship at Daikin, I worked on energy efficiency and environmental sustainability. Throughout my education, I developed projects on embedded systems, secure file management platforms, database systems, thermostat simulation, and machine learning classification models. With strong problem-solving skills and a passion for technology, I aim to provide innovative solutions to projects."
     )
