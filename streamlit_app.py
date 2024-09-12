@@ -1,113 +1,44 @@
+import requests
 import streamlit as st
+from streamlit_lottie import st_lottie
+from PIL import Image
 
-# Page configuration
-st.set_page_config(page_title="Erhan Zeki KILNAZ - CV", layout="centered", initial_sidebar_state="auto")
 
-# Custom CSS for structured layout, background image, and clean design
-def add_custom_css():
-    st.markdown(
-        """
-        <style>
-        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+# Find more emojis here: https://www.webfx.com/tools/emoji-cheat-sheet/
+st.set_page_config(page_title="Personal Webpage", page_icon=":🔖:", layout="wide")
 
-        /* Background image for the page */
-        body {
-            background-image: url('https://sphero.com/cdn/shop/articles/coding_languages_1024x.png?v=1619126283'); /* Subtle background */
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: #333333;
-            font-family: 'Nunito', sans-serif;
-        }
 
-        /* Style for headers */
-        h1, h2, h3 {
-            color: #2e3b4e;
-            font-weight: 700;
-        }
+def load_lottieurl(url):
+    r = requests.get(url)
+    if r.status_code != 200:
+        return None
+    return r.json()
 
-        /* Main content container */
-        .container {
-            background-color: rgba(255, 255, 255, 0.85);
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
 
-        /* Button styling */
-        .stButton>button {
-            background-color: #3498db;
-            color: white;
-            border-radius: 8px;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+# Use local CSS
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-        .stButton>button:hover {
-            background-color: #2980b9;
-        }
 
-        /* Image styling */
-        .stImage {
-            border-radius: 50%;
-            margin-bottom: 20px;
-        }
+local_css("style/style.css")
 
-        /* Contact button styling */
-        .contact-buttons a {
-            text-decoration: none;
-            color: white;
-        }
+# ---- LOAD ASSETS ----
+lottie_coding = load_lottieurl("https://assets5.lottiefiles.com/packages/lf20_iv4dsx3q.json")
+img_thermostat_sim = Image.open("images/yt_thermostat_sim.png")
+img_cloud_rile = Image.open("images/yt_cloud_rile.png")
+img_air_conditioning = Image.open("images/yt_air_conditioning_maintenance.jpg")
+img_sql_yrt = Image.open("images/yt_sql_yrt.png")
 
-        .contact-buttons .linkedin {
-            background-color: #0077b5;
-            padding: 10px 20px;
-            border-radius: 5px;
-            margin-right: 10px;
-            font-weight: bold;
-        }
 
-        .contact-buttons .github {
-            background-color: #333333;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-
-        /* Footer styling */
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 14px;
-            color: #888;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
+# ---- HEADER SECTION ----
+with st.container():
+    st.subheader("Hi, I am Erhan :wave:")
+    st.title("A Computer Engineer From Turkey")
+    st.write(
+        "Hello, I am Erhan Zeki KILNAZ, a graduate of Computer Engineering from Düzce University. During my internship at Daikin, I worked on energy efficiency and environmental sustainability. Throughout my education, I developed projects on embedded systems, secure file management platforms, database systems, thermostat simulation, and machine learning classification models. With strong problem-solving skills and a passion for technology, I aim to provide innovative solutions to projects."
     )
-
-add_custom_css()
-
-# Profile Image from URL
-image_url = 'https://media.licdn.com/dms/image/v2/D4D03AQEnWYJMCjxpAg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1711629083587?e=1731542400&v=beta&t=IJuj0QE9YFo8ObWXaKCINgpl8sFuJzVRVROp2-NKHcw'
-st.image(image_url, width=150)
-
-# Main Container for CV content
-st.markdown('<div class="container">', unsafe_allow_html=True)
-
-# Title and Personal Information
-st.title("Erhan Zeki KILNAZ")
-st.subheader("Computer Engineer")
-st.write("**Location:** Hendek/SAKARYA")
-st.write("**Phone:** +90 536 735 65 65")
-st.write("**E-mail:** [erhanzekikilnaz@hotmail.com](mailto:erhanzekikilnaz@hotmail.com)")
-
-# Contact Links (LinkedIn & GitHub)
-st.write("**Contact Me:**")
+    st.write("**Contact Me:**")
 st.markdown(
     """
     <div class="contact-buttons">
@@ -118,60 +49,101 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Personal Information Section
-st.header("Personal Information")
-st.write("**Date/Place of Birth:** Sakarya / 2001")
-st.write("**Driving License:** B Class")
+# ---- WHAT I DO ----
+with st.container():
+    st.write("---")
+    left_column, right_column = st.columns(2)
+    with left_column:
+        st.header("What I do")
+        st.write("##")
+        st.write(
+            """
+            I am a Computer Engineering graduate with a strong foundation in software development, data analysis, and embedded systems. I have hands-on experience working on projects ranging from energy efficiency and environmental sustainability during my internship at Daikin, to building secure file management platforms, thermostat simulation systems, and machine learning classification models. 
 
-# About Me Section
-st.header("About Me")
-st.write("""
-Hello, I am Erhan Zeki KILNAZ, a graduate of Computer Engineering from Düzce University. During my internship at Daikin, I worked on energy efficiency and environmental sustainability. Throughout my education, I developed projects on embedded systems, secure file management platforms, database systems, thermostat simulation, and machine learning classification models. With strong problem-solving skills and a passion for technology, I aim to provide innovative solutions to projects.
-""")
+            I am proficient in C++, C#, Python, and SQL, and have worked with database systems like MSSQL and PostgreSQL. My expertise also extends to machine learning and data analysis, where I have successfully applied these techniques in various projects. I have a keen interest in developing innovative solutions to real-world problems using my technical skills and passion for continuous learning.
 
-# Education Section
-st.header("Education")
-st.write("**2020-2024:** Düzce University / Computer Engineering")
+            - **Programming Languages**: C++, C#, Python, SQL
+            - **Tools & Technologies**: Arduino IDE, MSSQL, PostgreSQL, Machine Learning
+            - **Key Projects**: Cloud site development, Dormitory automation system, Thermostat simulation platform
 
-# Work Experience Section
-st.header("Work Experience")
-st.write("**01.07.2024-13.09.2024:** Daikin R&D / Intern")
+            """
+        )
+        
+    with right_column:
+        st_lottie(lottie_coding, height=300, key="coding")
 
-# Projects Section
-st.header("Projects")
-st.write("- [CloudReli](https://github.com/ErhanKlnz/Cloud-Site): Cloud site project")
-st.write("- [Yurt Otomasyonu](https://github.com/ErhanKlnz/Yurt-Otomasyonu): Dormitory automation project")
-st.write("- [Bookmate](https://github.com/ErhanKlnz/Bookmate): Bookmate project")
-st.write("- [Klima Bakım Takip Sistemi](https://github.com/ErhanKlnz/Air-Conditioning-Maintenance-Tracking-System-): Embedded systems project - Air Conditioning Maintenance Tracking System")
-st.write("- [Daikin Çevresel Sürdürülebilirlik ve Enerji Verimliliği](#): Evaluation of Heat Pumps, Packaging Materials, and Smart Thermostats")
-st.write("- [Termostat Simülasyon Platformu](https://github.com/ErhanKlnz/Thermostat-Simulation-Platform): Thermostat Simulation Platform")
-st.write("- [Farklı Sınıflandırma Algoritmalarının Karşılaştırılması](https://github.com/ErhanKlnz/Data-Engineering-Classification): Comparison of Different Classification Algorithms")
+# ---- PROJECTS ----
+with st.container():
+    st.write("---")
+    st.header("My Projects")
+    st.write("##")
+    image_column, text_column = st.columns((1, 1))
+    with image_column:
+        st.image(img_cloud_rile)
+    with text_column:
+        st.subheader("🌩️ Cloud-Rile - Cloud Storage System With Pyhton")
+        st.write(
+            """
+            Cloud-Rile is a cutting-edge cloud storage system designed to allow users to securely upload, store, and manage their files.🔐 User Registration and Login: Users can sign up and log in using their email and password.
+            🔗 Login with Google and GitHub: Users can authenticate with their Google and GitHub accounts.
+            📤 File Upload: Users can upload and store various types of files with ease.
+            👁️ File Viewing: Users can view their uploaded files directly in the browser.
+            📥 File Download: Users can download their files to local devices for offline access.
+            📁 Folder Management: Users can create and manage folders to organize their files efficiently.
+            🗑️ Trash Bin: Deleted files and folders are moved to the trash bin for potential recovery.
+            📊 Quota Management: Users have a specific storage quota and can monitor their current usage.
+            """
+        )
+        
+with st.container():
+    image_column, text_column = st.columns((1, 1))
+    with image_column:
+        st.image(img_thermostat_sim)
+    with text_column:
+        st.subheader("Thermostat Simulation")
+        st.write(
+            """
+            This project is designed for researchers, engineers and enthusiasts who want to analyze the performances of different control algorithms. The application assists the user in understanding their impact on room temperature control. Performance evaluations reveal under which conditions each algorithm works better. This interactive application allows you to compare the performance of different control algorithms (On-Off, PID, Q-Learning, Decision Trees) to maintain the temperature in the room. The simulation works with outdoor temperature data and tests various algorithms used to regulate the room temperature according to user-specified parameters.
+            """
+        )
+with st.container():
+    image_column, text_column = st.columns((1, 1))
+    with image_column:
+        st.image(img_air_conditioning)
+    with text_column:
+        st.subheader("Air Conditioning Maintenance Tracking System With ESP32")
+        st.write(
+            """
+This project aims to create an air conditioning maintenance tracking system using an ESP32 microcontroller and a GP2Y1010AU0F dust sensor. The system, built on a breadboard, monitors the cleanliness of the air filters in the air conditioner and provides maintenance alerts when necessary. The dust sensor measures air quality to detect filter clogging. The ESP32 analyzes the data from the sensor and sends status notifications to the user, issuing an alert when it's time for maintenance. This ensures that the air conditioning systems operate efficiently and healthily.            """
+        )
+with st.container():
+    image_column, text_column = st.columns((1, 1))
+    with image_column:
+        st.image(img_sql_yrt)
+    with text_column:
+        st.subheader("Dormitory automation system")
+        st.write(
+            """
+Realized a dormitory automation project using SQL and C#. In this project, digitalization and database management of processes such as student registration, rooms, payment tracking were provided. While data was stored, queried and reported with SQL, the user interface was created and data transactions were managed with C#. In this way, dormitory operations have become more efficient.            """
+        )
+# ---- CONTACT ----
+with st.container():
+    st.write("---")
+    st.header("Get In Touch With Me!")
+    st.write("##")
 
-# Skills Section
-st.header("Skills")
-st.write("- C++")
-st.write("- C#")
-st.write("- Python")
-st.write("- SQL")
-st.write("- Arduino IDE")
-st.write("- MSSQL")
-st.write("- PostgreSQL")
-st.write("- Machine Learning")
-st.write("- Data Analysis and Classification")
-
-# Competencies Section
-st.header("Competencies")
-st.write("- English: B1 Level")
-st.write("- Git")
-st.write("- MS Office (Word, Excel, PowerPoint): Intermediate")
-
-# References Section
-st.header("References")
-st.write("**Kübra Kılnaz:** Daikin Turkey Quality and Sustainability Department Manager")
-st.write("**Asena CEYLAN:** R&D Senior Compliance Engineer, Daikin Türkiye Heating and Cooling Systems")
-
-st.markdown('</div>', unsafe_allow_html=True)  # End of main container
-
-# Footer
-st.markdown("***")
-st.markdown('<div class="footer">This CV was created using **Streamlit**.</div>', unsafe_allow_html=True)
+    # Documention: https://formsubmit.co/ !!! CHANGE EMAIL ADDRESS !!!
+    contact_form = """
+    <form action="https://formsubmit.co/erhanzekikilnaz@hotmail.com" method="POST">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Your email" required>
+        <textarea name="message" placeholder="Your message here" required></textarea>
+        <button type="submit">Send</button>
+    </form>
+    """
+    left_column, right_column = st.columns(2)
+    with left_column:
+        st.markdown(contact_form, unsafe_allow_html=True)
+    with right_column:
+        st.empty()
